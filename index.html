@@ -167,5 +167,16 @@
     window.addEventListener('load', sendHeight);
     window.addEventListener('resize', sendHeight);
   </script>
+  <script>
+  function sendHeight() {
+    const height = document.body.scrollHeight;
+    window.parent.postMessage({ type: 'iframeHeight', height }, '*');
+  }
+
+  window.addEventListener('load', sendHeight);
+  window.addEventListener('resize', sendHeight);
+  setInterval(sendHeight, 1000); // 加強版，防止 resize 沒偵測到
+</script>
+
 </body>
 </html>
